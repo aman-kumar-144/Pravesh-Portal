@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Issues in the Application If Any
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <div *ngIf="globals.application &&  !globals.application?.submitted && globals.application?.verifier_remarks !== '' " class="form-group">
+                                <div class="label-div">
+                                    <label>Issues identified during Application Verification</label>
+                                </div>
+                                <div class="control-div">
+                                    {{ globals.application.verifier_remarks }}
+                                </div>
+                                <div *ngIf="globals.application?.submission_status !== 'SUB' && globals.application?.verifier_remarks !== ''" class="help-div">
+                                    <label [ngStyle]="{'color': 'red'}">
+                                        Please address the issues identified above before you resubmit your application. Resubmitting
+                                        without adequately addressing these issues could result in your application getting summarily rejected.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Issues in the Application
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                        <div class="accordion-body">
+                            <div *ngIf="globals.application && !globals.application?.submitted">
+                                <div class="label-div">
+                                    <span class="required"><label>Issues in the Application</label></span>
+                                </div>
+                                <div class="control-div">
+                                    {{ globals.application.issues }}
+                                </div>
+                                <div *ngIf="globals.application?.submission_status !== 'SUB' && globals.application?.issues !== ''" class="help-div">
+                                    <label [ngStyle]="{'color': 'red'}">You will not be able to submit if the issue list is not empty.</label>
+                                </div>
+                                <div *ngIf="globals.application?.submission_status !== 'SUB' && globals.application?.complete && globals.application?.issues === ''" class="help-div">
+                                    <label [ngStyle]="{'color':'green'}">You can submit your application now.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Application Submitted At
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                        <div class="accordion-body">
+                            <div *ngIf="globals.application && !globals.application?.submitted">
+                                <div class="label-div">
+                                    <span class="required"><label>Application Submitted At</label></span>
+                                </div>
+                                <div class="control-div">
+                                    {{ globals.application.submitted_at }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-soochana></app-soochana>

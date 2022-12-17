@@ -1,0 +1,334 @@
+<div class="container-fluid">
+  <div class="page-container">
+    <div class="page-content-wrapper">
+
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+
+        <div class="accordion-item" *ngIf="this.globals.currentCredentials">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne">
+              Application Fee Payment
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+            aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <div class="label-div">
+                <span class="required"><label><strong>Payment Link</strong></label></span>
+              </div>
+              <div class="control-div">
+                <button class="btn btn-primary" (click)="payment()">
+                  Make Payment at the Payment Gateway
+                </button>
+              </div>
+              <div class="help-div">
+                <label>Please click this button to be redirected to the secure payment gateway where you can complete
+                  the payment.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo">
+              Identification
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <form [formGroup]="identificationForm" (ngSubmit)="onSubmit()">
+
+                <div *ngFor="let item of identificationArray" class="form-group"
+                  style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span *ngIf="item.required" class="required"><label><strong>{{ item.label }}</strong></label></span>
+                    <span *ngIf="!item.required"><label><strong>{{ item.label }}</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <input autofocus class="form-control" type="text" id="{{ item.field }}" name="{{ item.field }}"
+                      formControlName="{{ item.field }}" 
+                      [required]="item.required">
+                    <!-- <div *ngIf="item.required" class="required">
+                      <div *ngIf="submitted && identificationForm['controls']['{{item.field}}'].errors" class="text-danger">
+                        <div *ngIf="submitted && identificationForm['controls']['{{item.field}}'].errors?.['required']">
+                          {{ item.label }} is Required
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+
+                <div *ngIf="globals.candidate" class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <label><strong>Current Photograph</strong></label>
+                  </div>
+                  <div class="control-div">
+                    <img src="{{ globals.candidate?.photographUrl }}" alt="{{globals.candidate?.photographUrl}}" />
+                    <p>The Image URL is {{globals.candidate?.photographUrl}}</p>
+                  </div>
+                </div>
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>{{ globals.candidate ? "Change " : "Please Upload "
+                          }}Photograph</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <input type="file" #photograph (change)="photographUpload($any($event.target).files)">
+                  </div>
+                  <div class="help-div">
+                    <label>Please upload a recent passport-size photograph of yours. The file size can not exceed
+                      {{ globals.photoSizeLimitMsg() }} and must be in a standard format. Archives such as
+                      .zip/.tar/.rar will not be accepted.</label>
+                  </div>
+                </div>
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>{{ globals.candidate ? "Change " : "Please Upload "
+                          }}Photograph
+                          Proof</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <input type="file" #photo_proof (change)="photographProofUpload($any($event.target).files)">
+                  </div>
+                  <div class="help-div">
+                    <label>Please upload Photo-ID Proof of yours (Aadhaar / Passport / Driving License / Voters ID). The
+                      file size cannot exceed
+                      {{ globals.photoSizeLimitMsg() }} and must be in a standard format. Archives such as
+                      .zip/.tar/.rar will not be accepted.</label>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree">
+              Personal Particulars
+            </button>
+          </h2>
+
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingThree">
+            <div class="accordion-body">
+              <form [formGroup]="personalParticularsForm">
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>Date of Birth</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Choose a date</mat-label>
+                      <input autofocus class="form-control" type="text" id="dob" name="dob" formControlName="dob" matInput [matDatepicker]="picker">
+                      <mat-hint>MM/DD/YYYY</mat-hint>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <button class="btn btn-primary" type="button" mat-raised-button (click)="picker.open()">Open</button>
+                  </div>
+                </div>
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>Gender</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <select autofocus class="form-control" name="gender" id="gender" formControlName="gender" required>
+                      <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>Title</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <select autofocus class="form-control" name="title" id="title" formControlName="title" required>
+                      <option *ngFor="let t of titles" [value]="t">{{ t }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                  <div class="label-div">
+                    <span class="required"><label><strong>Nationality</strong></label></span>
+                  </div>
+                  <div class="control-div">
+                    <select autofocus class="form-control" name="nationality" id="nationality"
+                      formControlName="nationality" required>
+                      <option *ngFor="let c of globals.countryKeys()" [value]="c">{{ globals.countries.get(c) }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFour">
+                Contact Details
+              </button>
+            </h2>
+
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingFour">
+              <div class="accordion-body">
+                <form [formGroup]="contactDetailsForm">
+                  <div *ngFor="let item of contactInformationArray" class="form-group"
+                    style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span *ngIf="item.required" class="required"><label><strong>{{ item.label
+                            }}</strong></label></span>
+                      <span *ngIf="!item.required"><label><strong>{{ item.label }}</strong></label></span>
+                    </div>
+                    <div class="control-div">
+                      <input autofocus type="text" class="form-control" id="{{item.field}}" name="{{item.field}}"
+                        formControlName="{{item.field}}" [required]="item.required">
+                    </div>
+                    <div class="help-div">
+                      <label>{{item.help}}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label><strong>Country of Residence</strong></label></span>
+                    </div>
+                    <div class="control-div">
+                      <select autofocus class="form-control" name="country_of_residence" id="country_of_residence"
+                        formControlName="country_of_residence" required>
+                        <option *ngFor="let c of globals.countryKeys()" [value]="c">{{ globals.countries.get(c) }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFive">
+                Professional Information
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingFive">
+              <div class="accordion-body">
+                <form [formGroup]="professionalInformationForm">
+                  <div *ngFor="let item of professionalInformationArray" class="form-group"
+                    style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span *ngIf="item.required" class="required"><label><strong>{{item.label}}</strong></label></span>
+                      <span *ngIf="!item.required"><label><strong>{{item.label}}</strong></label></span>
+                    </div>
+                    <div class="control-div">
+                      <input autofocus type="text" class="form-control" id="{{item.field}}" name="{{item.field}}"
+                        formControlName="{{item.field}}" [required]="item.required">
+                    </div>
+                    <div class="help-div">
+                      <label>{{item.help}}</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="accordion-item" *ngIf="globals.candidate && globals.application?.payment_status == 'confirmed'">
+            <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseSix">
+                Application Fee Payment
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse"
+              aria-labelledby="panelsStayOpen-headingSix">
+              <div class="accordion-body">
+                <form>
+                  <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label>Payment Reference</label></span>
+                    </div>
+                    <div class="control-div">
+                      <label>{{ globals.application?.payment_reference }}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label>Payment Amount</label></span>
+                    </div>
+                    <div class="control-div">
+                      <label><strong>&#8377; {{ globals.currentCycle.application_fee }}/-</strong></label>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label>Payment Made On</label></span>
+                    </div>
+                    <div class="control-div">
+                      <label>{{ globals.application?.payment_date }}</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label>Payment Status</label></span>
+                    </div>
+                    <div class="control-div">
+                      <label>{{ globals.application?.payment_status }}</label>
+                    </div>
+                  </div>
+
+                  <div *ngIf="globals.application?.payment_status !== 'confirmed'" class="form-group"
+                    style="width:100%; padding-top:20px; clear:both;">
+                    <div class="label-div">
+                      <span class="required"><label>Payment Link</label></span>
+                    </div>
+                    <div class="control-div">
+                      <button class="btn btn-primary"
+                        [ngStyle]="{'margin-left': '30%', 'margin-right': '50%', 'margin-bottom': '10px'}"
+                        (click)="payment()">Make Payment at the Payment Gateway</button>
+                      <!--<button *ngIf="globals.currentCredentials.user.email === 'raghavangs@gmail.com'" class="btn btn-primary" [ngStyle]="{'margin-left': '30%', 'margin-right': '50%', 'margin-bottom': '10px'}"-->
+                      <!--(click)="payment()">Make Payment at the Payment Gateway (for me only)</button>-->
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="register()" style="margin-top:20px;">
+      Register
+    </button>
+    <app-soochana (ok)="returnSoochana($event)" (cancel)="returnSoochana($event)"></app-soochana>
+  </div>

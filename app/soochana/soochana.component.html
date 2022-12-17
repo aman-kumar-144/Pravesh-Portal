@@ -1,0 +1,25 @@
+<div *ngIf="show">
+    <div class="pravesh-dialog" [style.z-index]="dialogZ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">{{ title }}</h1>
+                <button type="button" class="close" (click)="onCancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                {{ openingMessage }}
+            </div>
+            <div *ngIf="messageType === 'error'" class="modal-body">
+                <strong>Error</strong>: {{ errorMessage }}<br>
+                <strong>Description</strong>: {{ verboseStatus }}<br>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onOk()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
