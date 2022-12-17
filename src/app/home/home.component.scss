@@ -1,0 +1,44 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover,
+a:active {
+    color: rgb(0, 0, 0);
+}
+
+.jumbotron {
+    padding: 0.3em 0.3em;
+}
+
+.flex-container {
+    margin-top: 50px;
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.carousel {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.carousel .carousel-item {
+    max-height:300px;
+}
+
+.carousel-item img {
+    object-fit:cover;
+    max-height:300px;
+}

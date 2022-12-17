@@ -1,0 +1,111 @@
+<div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Ph.D / Master of Science by Research
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="page-header">Application Process and Checklist for <br> Ph.D / Master of Science by Research Admissions</div><br>
+                <p>A summary / cheat-sheet of the full <a href="{{ callForMsPhdUrl }}">Call for Applications</a> is given below.
+                    Please refer to this document for specific details. The call for applications overrides in case of any conflict.</p>
+                    <ol style="list-style: decimal;">
+                    <li><strong>Registration</strong> - this will create a unique user id (your email) for you that you can use to access the site
+                    with, throughout the application process. This triggers an email to your registered email address.</li>
+                    <li>Click on the link in the registration email to activate your account. You may have to change your
+                    default password to something of your choice.</li>
+                    <li>Login with your email and password and <strong>pay the Non-Refundable Application Fee of &#8377; {{ globals.currentCycle.application_fee }}/-</strong>.
+                    The Application fee is to be paid through
+                    the payment gateway <strong>FeePlaza</strong> that IIIT-B is partnering with. Please follow the link
+                    on the registration page of the application --- this will direct you to the Fee Plaza site where you can
+                    make your payment. The registration will be cancelled if you do not activate the account and complete the payment
+                    within <strong>48 hrs</strong> after the registration.</li>
+                    <li>You can see the rest of the application on payment confirmation. Please fill the application completely. Application can be filled in
+                    parts and saved at your convenience.</li>
+                    <li>Fill in the details of at least 2 referees. They will be contacted directly by IIIT-B by email. The
+                    referees will requested to upload their recommendations directly on this portal.</li>
+                    <li>Submit the application before the deadline -
+                    <strong>{{ globals.currentCycle.application_deadline | date: 'MMM dd, yyyy; HH:mm' }} Hrs</strong></li>
+                    <li>Watch this portal / your email for updates on your application.</li>
+                </ol>
+                <p>The following checklist would help you be prepared with the application process. We suggest you keep the
+                    required information / documents ready before you start applying.</p><br>
+                <ul style="list-style-type:square;">
+                    <li>Personal Information (email, photograph, address, and some official identity proof)</li>
+                    <li>Details of Academic Qualifications - from 10th to PG (if applicable). This
+                    must include institution, year of passing, marks/grades in each course/subject and a consolidated
+                    pdf of degree certificate along with the transcripts with all the marks and grades.</li>
+                    <li>Details of Competitive Exams (GRE, GATE, JEST etc.) you may have taken. Some of these may be
+                    necessary for the specific program / domain that you may be applying to. Please check the
+                    <a href="{{ callForMsPhdUrl }}">Call for Applications</a> for details.
+                    The details required would include exam name, score obtained and soft (scanned) copy of the
+                    score sheet.</li>
+                    <li>Your choice of the research domain and specific area(s) in which you want to pursue research.</li>
+                    <li><strong>Statement of Purpose</strong>, <strong>Research Preparation</strong> documents that you
+                    are expected to write to let us know your motivation and preparedness for the research program that
+                    you are applying for. These must be uploaded as individual .pdf documents.</li>
+                    <li>(<strong>Optional</strong>) Document (.pdf) detailing your work-experience if any.</li>
+                    <li>(<strong>Optional</strong>) Document (.pdf or .doc) listing all your publications / patents if any
+                    along with soft copies of 2 representative publications of yours.</li>
+                    <li>Email and contact details of at least 2 referees who can vouch for your research potential and
+                    credentials. Please note that the referees will be contacted directly by IIIT-B requesting them
+                    to upload their recommendations directly on the portal.</li>
+                </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            M.Sc Digital Society 
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <p>A summary / cheat-sheet of the full <a href="{{ callForMscdtUrl }}">Call for Applications</a> is given below.
+          Please refer to this document for specific details. The call for applications overrides in case of any conflict.</p>
+        <ol style="list-style: decimal;">
+          <li><strong>Registration</strong> - this will create a unique user id (your email) for you that you can use to access the site
+            with, throughout the application process. This triggers an email to your registered email address.</li>
+          <li>Click on the link in the registration email to activate your account. You may have to change your
+            default password to something of your choice.</li>
+          <li>Login with your email and password and <strong>pay the Non-Refundable Application Fee of &#8377; {{ globals.currentCycle.application_fee }}/-</strong>.
+            The Application fee is to be paid through
+            the payment gateway <strong>FeePlaza</strong> that IIIT-B is partnering with. Please follow the link
+            on the registration page of the application --- this will direct you to the Fee Plaza site where you can
+            make your payment. The registration will be cancelled if you do not activate the account and complete the payment
+            within <strong>48 hrs</strong> after the registration.</li>
+          <li>Login with your email and password and fill the application completely. Application can be filled in
+            parts and saved at your convenience.</li>
+          <li>Submit the application before the deadline -
+            <strong>{{ mscdt.application_deadline | date: 'MMM dd, yyyy; HH:mm' }} Hrs</strong>. The interviews and written tests will be
+          held in two rounds --- you would be called for the first round or the second depending on when you submit your application. Please
+          see the calendar for the scheduled dates for the two rounds.</li>
+          <li>Watch this portal / your email for updates on your application.</li>
+        </ol>
+        <p>The following checklist would help you be prepared with the application process. We suggest you keep the
+          required information / documents ready before you start applying.</p><br>
+        <ul style="list-style-type:square;">
+          <li>Personal Information (email, photograph, address, and some official identity proof)</li>
+          <li>Details of Academic Qualifications - from 10th to PG (if applicable). This
+            must include institution, year of passing, marks/grades in each course/subject and a consolidated
+            pdf of degree certificate along with the transcripts with all the marks and grades.</li>
+          <li>Details of Competitive Exams (GRE, GMAT, CAT, CEED, CUCET, TISS NET, etc.) you have taken. Please check the
+            <a href="{{ callForMscdtUrl }}">Call for Applications</a> for the mandatory requirements.
+            The details required would include exam name, score obtained and soft (scanned) copy of the
+            score sheet.</li>
+          <li><strong>Statement of Purpose</strong> document that you
+            are expected to write to let us know your motivation and preparedness for the Digital Society program that
+            you are applying for. This must be uploaded as a single .pdf document.</li>
+          <li>(<strong>Optional</strong>) Document (.pdf) detailing your work-experience if any.</li>
+        </ul>
+        </div>
+      </div>
+    </div>
+</div>

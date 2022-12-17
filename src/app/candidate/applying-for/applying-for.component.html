@@ -1,0 +1,288 @@
+<div class="container-fluid">
+    <div class="page-container">
+        <div class="page-content-wrapper">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Program (Ph.D / M.S by Research / M.Sc Digital Society) which you intend Applying To
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" 
+                        aria-labelledby="headingOne">
+                        <div class="accordion-body">
+                            <form [formGroup]="programForm">
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span class="required"><label><strong>Program</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="program" id="program"
+                                            placeholder="Select" formControlName="program" required
+                                            (change)="programChange()">
+                                            <option *ngFor="let p of programList" [value]="p">{{
+                                                globals.programs.name(p) }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control-feedback" *ngIf="programForm.controls['program'].errors">
+                                        <p *ngIf="programForm.controls['program'].errors['message']">
+                                            {{ programForm.controls['program'].errors['message'] }}
+                                        </p>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>Program which you intend Applying for Admission To</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span class="required"><label><strong>Admission Type</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="admission_type" id="admission_type"
+                                            formControlName="admission_type" required>
+                                            <option *ngFor="let c of globals.admissionTypeKeys()" [value]="c">{{
+                                                globals.admissionTypes.get(c) }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>Mode in which you would like to pursue the program in case you are
+                                            Admitted</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Areas of Interest
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseTwo" class="accordion-collapse collapse"  aria-labelledby="headingTwo">
+                        <div class="accordion-body">
+                            <form [formGroup]="areasOfInterestForm">
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span class="required"><label><strong>Domain - First
+                                                    Preference</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="domain_preference1"
+                                            id="domain_preference1" formControlName="domain_preference1" required
+                                            (change)="domainChange1()">
+                                            <option *ngFor="let d of domainArray" [value]="d.id">{{
+                                                globals.alldomains.get(d.domain) }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control-feedback"
+                                        *ngIf="areasOfInterestForm.controls['domain_preference1'].errors">
+                                        <p *ngIf="areasOfInterestForm.controls['domain_preference1'].errors['message']">
+                                            {{ areasOfInterestForm.controls['domain_preference1'].errors['message'] }}
+                                        </p>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>Primary Broad Area of Interest. You need to have selected a Program
+                                            before you can select the domain.</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span class="required"><label><strong>Preferred Topic of
+                                                    Interest</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="subdomain1" id="subdomain1"
+                                            formControlName="subdomain1" required (change)="subdomainChange1()">
+                                            <option *ngFor="let d of subdomains1" [value]="d.id">{{ d.subdomain }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control-feedback"
+                                        *ngIf="areasOfInterestForm.controls['subdomain1'].errors">
+                                        <p *ngIf="areasOfInterestForm.controls['subdomain1'].errors['message']">
+                                            {{ areasOfInterestForm.controls['subdomain1'].errors['message'] }}
+                                        </p>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>Primary Topic of interest to you - something that you would like to
+                                            pursue deeper study in during
+                                            the course of the program you have applied for. <strong>You need to have
+                                                selected a Program and a Domain
+                                                before you can select the topic.</strong> The list here is based on
+                                            current faculty availability for
+                                            research supervision and their areas of interest. If you are keen on any
+                                            other area please indicate those
+                                            in the "Additional Areas of Interest" field in this form.</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span><label><strong>Domain - Second Preference</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="domain_preference2"
+                                            id="domain_preference2" formControlName="domain_preference2"
+                                            (change)="domainChange2()">
+                                            <option *ngFor="let d of domainArray" [value]="d.id">{{
+                                                globals.alldomains.get(d.domain) }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>Secondary Broad Area of Interest</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span><label><strong>Next Preferred Topic of Interest</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <select autofocus class="form-control" name="subdomain2" id="subdomain2"
+                                            formControlName="subdomain2">
+                                            <option *ngFor="let d of subdomains2" [value]="d.id">{{ d.subdomain }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="help-div">
+                                        <label>
+                                            Secondary Topic of interest to you - something that you are equally
+                                            passionate about and
+                                            something would like to pursue in case your first choice is not available
+                                            for some reason.
+                                            <strong>You need to have selected a Program and a Secondary Domain
+                                                before you can select the topic.</strong> The list here is based on
+                                            current faculty availability for
+                                            research supervision and their areas of interest. If you are keen on any
+                                            other area please indicate those
+                                            in the "Additional Areas of Interest" field in this form.
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span><label><strong>Additional Areas of Interest</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <input autofocus type="text" name="additional_subdomains"
+                                            id="additional_subdomains" class="form-control"
+                                            formControlName="additional_subdomains">
+                                    </div>
+                                    <div class="help-div">
+                                        <label>
+                                            Additional Areas of Interest that you would be interested in. <strong>Please
+                                                note that indicating
+                                                too many areas of interest is often perceived as lack of focus,
+                                                something which is not desirable
+                                                for a research program.</strong>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Statement of Purpose
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                        <div class="accordion-body">
+                            <form [formGroup]="sopForm">
+                                <div *ngIf="globals.application && globals.application.sopUrl" class="form-group"
+                                    style="width:100%; padding-top:20px; clear:both;">
+                                    <div class="label-div">
+                                        <label>Current Statement of Purpose</label>
+                                    </div>
+                                    <div class="control-div">
+                                        <a href="{{ globals.application.sopUrl }}">Saved Statement of Purpose</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="label-div">
+                                        <span class="required"><label><strong>{{ globals.candidate ? "Change " : ""
+                                                    }}Statement of Purpose</strong></label></span>
+                                    </div>
+                                    <div class="control-div">
+                                        <input type="file" #statement_of_purpose
+                                            (change)="sopUpload($any($event.target).files)">
+                                    </div>
+                                    <div class="help-div">
+                                        <label>
+                                            Describe in a short .pdf document your motivation for
+                                            seeking admission to the IIIT-B research programs. It is
+                                            important for us to understand your vision and long-term
+                                            goals that have prompted you to apply. Please make sure the
+                                            document you upload is a single .pdf/.doc document size not
+                                            exceeding {{ globals.fileSizeLimitMsg() }}. Archives such as .zip/.tar/.rar
+                                            will not be
+                                            accepted.
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            A Survey on Common Patterns-Combinations of Fine-Grained Research Topics
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                        <div class="accordion-body">
+                            <div class="form-group">
+                                <div class="control-div">
+                                    <button class="btn btn-primary"
+                                        [ngStyle]="{'margin-left': '30%', 'margin-right': '50%', 'margin-bottom': '10px'}"
+                                        (click)="survey()">Click Here to Take the Survey</button>
+                                </div>
+                                <div style="margin-left: 0">
+                                    <label>
+                                        Please take about 5 minutes to fill this small survey. We are doing this in
+                                        order to be able to
+                                        arrive at a more principled, data-driven scheduling of the application reviews
+                                        and interviews involving several faculty
+                                        members and candidates
+                                        whose interests cut-across disciplines. This will hopefully ensure that we will
+                                        be able to assemble just the right
+                                        set of faculty members for each interview depending on the specific area of
+                                        interest of the candidate, instead of relying
+                                        on broad topics like Data Sciences, Networking, VLSI, Algorithms etc.
+                                        The survey form contains a list of research topics our faculty members work in.
+                                        Please select an appropriate number
+                                        (typically 5-10) of the topics that best describe your research interests.
+                                        Please note that the topics appear in a
+                                        randomised sequence. Hence, please do a quick scan of the list before selecting
+                                        your options.
+                                        Please note that you also have to fill in your application id (the Application
+                                        Id is given in braces on the right as part of the title
+                                        at the top of this page) in the form for our reference.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-soochana></app-soochana>

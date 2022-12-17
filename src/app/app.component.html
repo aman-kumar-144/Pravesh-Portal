@@ -1,0 +1,115 @@
+<div id="mmenu_screen" class="container-fluid flex-fill">
+  <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/logo.jpeg">
+      </a>
+      <div class="container text-white">
+        <h1>Pravesh</h1>
+        <p>The IIIT-B Ph.D / M.S by Research / M.Sc Digital Society Admissions Portal </p>
+      </div>
+      <div class="container text-white">
+        <span id="welcome">{{ globals.currentCredentials ? ("Welcome " + globals.currentCredentials.user.short_name) : "" }}</span>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav mr-auto"> -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a *ngIf="!globals.currentCredentials" class="nav-link" routerLink="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" (click)="normalLogin()">Login</a>
+          </li>
+          <li class="nav-item">
+            <a *ngIf="globals.currentCredentials" class="nav-link" routerLink="/candidate_dashboard">Your Application</a>
+          </li>
+          <li class="nav-item">
+            <a *ngIf="globals.currentCredentials" class="nav-link" routerLink="/checklist">Checklist</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Downloads</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" onclick="return true;" target="_blank" href="{{ phdprogramManualUrl }}">Ph.D
+                    Program Manual</a></li>
+                <li><a class="dropdown-item" onclick="return true;" target="_blank" href="{{ msprogramManualUrl }}">MS by
+                    Research Program Manual</a></li>
+                <li><a *ngIf="globals.currentCycle?.has_mscdt" class="dropdown-item" onclick="return true;"
+                    target="_blank" href="{{ mscdsprogramManualUrl }}">M.Sc Digital Society Program Manual</a></li>
+                <li><a *ngIf="globals.currentCycle?.has_mscdt" class="dropdown-item" onclick="return true;"
+                    target="_blank" href="{{ mscdscurriculumUrl }}">M.Sc Digital Society Curriculum</a></li>
+              </ul>
+          </li>
+          <li class="nav-item">
+            <a *ngIf="globals.currentCredentials" class="nav-link" (click)="logout()" routerLink="/">Logout</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <div id="mmenu_screen" class="spacing-div container-fluid main_container flex-fill">
+      <router-outlet></router-outlet>
+  </div>
+
+  
+  <footer class="bg-primary text-center text-white flex-fill">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <a href="https://github.com/IIITBangalore" title="Github" target="_blank">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+      </a>
+
+      <a href="https://www.facebook.com/IIITBofficial/" title="Facebook" target="_blank">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+      </a>
+
+      <a href="https://twitter.com/IIITB_official" title="Twitter" target="_blank">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+      </a>
+
+      <a href="https://www.linkedin.com/school/iiit-bangalore/" title="Linkedin" target="_blank">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <i class="fa fa-linkedin-square fa-stack-1x"></i>
+        </span>
+      </a>
+
+      <a href="https://www.youtube.com/c/iiitbmedia" title="Youtube" target="_blank">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle-thin fa-stack-2x"></i>
+          <i class="fa fa-youtube fa-stack-1x"></i>
+        </span>
+      </a>
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3 flex-fill" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-white" href="https://www.iiitb.ac.in/">International Institute of Information Technology - Bangalore</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</div>
+<app-login (loggedIn)="onLogin($event)"></app-login>
+<app-soochana (ok)="returnSoochana($event)" (cancel)="returnSoochana($event)"></app-soochana>

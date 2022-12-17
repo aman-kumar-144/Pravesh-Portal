@@ -1,0 +1,42 @@
+<p>qualifications works!</p>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="school-tab" data-toggle="tab" href="#school" role="tab" aria-controls="school" aria-selected="true">Schooling</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="ug-tab" data-toggle="tab" href="#ug" role="tab" aria-controls="ug" aria-selected="false">Under Graduate</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pg-tab" data-toggle="tab" href="#pg" role="tab" aria-controls="pg" aria-selected="false">Post Graduate</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="exam-tab" data-toggle="tab" href="#exam" role="tab" aria-controls="exam" aria-selected="false">Competetive Exam</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="cert-tab" data-toggle="tab" href="#cert" role="tab" aria-controls="cert" aria-selected="false">Certification</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="diploma-tab" data-toggle="tab" href="#diploma" role="tab" aria-controls="diploma" aria-selected="false">Diploma</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="school" role="tabpanel" aria-labelledby="school-tab">
+        <app-qualifications-of-type [qualificationType]="'high_school'" #high_school></app-qualifications-of-type>
+    </div>
+    <div class="tab-pane fade" id="ug" role="tabpanel" aria-labelledby="ug-tab">
+        <app-qualifications-of-type [qualificationType]="'under_graduate'" #under_graduate></app-qualifications-of-type>
+    </div>
+    <div class="tab-pane fade" id="pg" role="tabpanel" aria-labelledby="pg-tab">
+        <app-qualifications-of-type [qualificationType]="'post_graduate'" #post_graduate></app-qualifications-of-type>
+    </div>
+    <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
+        <app-qualifications-of-type [qualificationType]="'competetive_exam'" #competetive_exam></app-qualifications-of-type>
+    </div>
+    <div class="tab-pane fade" id="cert" role="tabpanel" aria-labelledby="cert-tab">
+        <app-qualifications-of-type [qualificationType]="'certification'" #certification></app-qualifications-of-type>
+    </div>
+    <div class="tab-pane fade" id="diploma" role="tabpanel" aria-labelledby="diploma-tab">
+        <app-qualifications-of-type [qualificationType]="'diploma'" #diploma></app-qualifications-of-type>
+    </div>
+</div>

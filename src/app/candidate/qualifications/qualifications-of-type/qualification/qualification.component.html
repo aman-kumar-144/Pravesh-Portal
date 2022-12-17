@@ -1,0 +1,77 @@
+<form [formGroup]="qualificationForm">
+    <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+        <div class="label-div">
+            <span class="required"><label>Qualification Obtained</label></span>
+        </div>
+        <div class="control-div">
+            <select autofocus class="form-control" name="qualification_name" id="qualification"
+                formControlName="qualification" (change)="qualificationChange()" required>
+                <option *ngFor="let q of qualificationNames" [value]="q.id">{{ q.name }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div *ngIf="showOther" class="form-group" style="width:100%; padding-top:20px; clear:both;">
+        <div class="label-div">
+            <span class="required"><label>{{ 'Name of the ' + verboseQualificationType + ' Obtained' }}</label></span>
+        </div>
+        <div class="control-div">
+            <input autofocus class="form-control" type="text" id="other" name="other" formControlName="other" required>
+        </div>
+        <div class="help-div">
+            <label>{{ 'Any other ' + this.verboseQualificationType + ' not listed in the drop-down above.' }}</label>
+        </div>
+    </div>
+
+    <div *ngFor="let attr of attributeArray" class="form-group" style="width:100%; padding-top:20px; clear:both;">
+        <div *ngIf="showField(attr.field)" class="label-div">
+            <span *ngIf="attr.required" class="required"><label>{{ attr.label }}</label></span>
+            <span *ngIf="!attr.required"><label>{{ attr.label }}</label></span>
+        </div>
+        <div *ngIf="showField(attr.field)" class="control-div">
+            <input autofocus class="form-control" type="{{ attr.type }}" id="{{ attr.field }}" name="{{ attr.field }}"
+                formControlName="{{ attr.field }}" [required]="attr.required">
+        </div>
+        <div *ngIf="showField(attr.field)" class="help-div">
+            <label>{{ attr.help }}</label>
+        </div>
+    </div>
+
+    <div *ngIf="qualification && qualification.certificateUrl" class="form-group"
+        style="width:100%; padding-top:20px; clear:both;">
+        <div class="label-div">
+            <label>Current Uploaded Certificate</label>
+        </div>
+        <div class="control-div">
+            <a href="{{ qualification.certificateUrl }}">Saved Certificate</a>
+        </div>
+    </div>
+
+    <div class="form-group" style="width:100%; padding-top:20px; clear:both;">
+        <div class="label-div">
+            <span class="required"><label>Change Certificate</label></span>
+        </div>
+        <div class="control-div">
+            <input type="file" #certificate (change)="certificateUpload($any($event.target).files)">
+        </div>
+        <div class="help-div">
+            <label>Please upload a soft copy of your certificate along with transcripts of score/marks/grades as
+                applicable.
+                Upload a single pdf document of size not exceeding {{ globals.fileSizeLimitMsg() }}.
+                No zip/tar files please.</label>
+        </div>
+    </div>
+
+    <div *ngIf="globals.application && !globals.application?.submitted"
+    [ngStyle]="{'margin-right': '10px', 'margin-top': '20px', 'width': '100%'}">
+        <label *ngIf="saveButton.disabled" class="validity-message">{{ globals.validityNote }}</label>    
+        <button class="btn btn-primary" #saveButton
+                [disabled]="((certificateControl.nativeElement.value === '' && !qualificationForm.touched) ||
+                             !qualificationForm.valid)"
+                (click)="save()">Save</button>
+        <button class="btn btn-primary" 
+            [ngStyle]="{'margin-right': '10px'}"
+            (click)="remove()">Remove</button>
+    </div>
+</form>
+<app-soochana (ok)="returnSoochana($event)" (cancel)="returnSoochana($event)"></app-soochana>
